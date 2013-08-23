@@ -25,11 +25,17 @@ class Consistency {
     public function import($imported) {
         $resolved = $this->resolve($imported);
 
-        if(false === class_exists($resolved)) {
-            $alias = implode('\\', array_slice(explode('\\', $resolved), 0, -1));
+        if(false === class_exists($resolved, false)) {
+            $parts = $resolved = explode('\\', $resolved);
+            $class = array_pop($parts);
+            $ns = array_pop($parts);
 
-            if(false === class_exists($alias) && false === interface_exists($alias)) {
-                class_alias($resolved, $alias);
+            if($class === $ns) {
+                $alias = implode('\\', array_slice($resolved, 0, -1));
+
+                if(false === class_exists($alias) && false === interface_exists($alias)) {
+                    class_alias(implode('\\', $resolved), $alias);
+                }
             }
         }
 
