@@ -25,18 +25,8 @@ class Consistency {
     public function import($imported) {
         $resolved = $this->resolve($imported);
 
-        if(false === class_exists($resolved, false)) {
-            $parts = $resolved = explode('\\', $resolved);
-            $class = array_pop($parts);
-            $ns = array_pop($parts);
-
-            if($class === $ns) {
-                $alias = implode('\\', array_slice($resolved, 0, -1));
-
-                if(false === class_exists($alias) && false === interface_exists($alias)) {
-                    class_alias(implode('\\', $resolved), $alias);
-                }
-            }
+        if(null !== ($alias = $this->alias($resolved))) {
+            class_alias($resolved, $alias);
         }
 
         return $this;
@@ -57,6 +47,22 @@ class Consistency {
         $import = implode('\\', $parts);
 
         return $this->_family . '\\' . $import;
+    }
+
+    public function alias($resolved) {
+        if(false === class_exists($resolved, false)) {
+            $parts = $resolved = explode('\\', $resolved);
+            $class = array_pop($parts);
+            $ns = array_pop($parts);
+
+            if($class === $ns) {
+                $alias = implode('\\', array_slice($resolved, 0, -1));
+
+                if(false === class_exists($alias) && false === interface_exists($alias)) {
+                    return $alias;
+                }
+            }
+        }
     }
 }
 

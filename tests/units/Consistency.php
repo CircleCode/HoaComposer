@@ -35,4 +35,26 @@ class Consistency extends atoum {
                 ->string($object->resolve($class. '.~I'))->isEqualTo($family . '\\' . $class . '\\' . $class . 'I')
         ;
     }
+
+    public function testAlias() {
+        $this
+            ->given($namespace = uniqid())
+            ->and($class = uniqid())
+            ->if($object = TestedClass::from(uniqid()))
+            ->and($this->function->class_exists = false)
+            ->and($this->function->interface_exists = false)
+            ->then
+                ->variable($object->alias($namespace . '\\' . $class))->isNull()
+            ->if($namespace = $class = uniqid())
+            ->then
+                ->string($object->alias($namespace . '\\' . $class))->isEqualTo($class)
+            ->if($this->function->class_exists = true)
+            ->then
+                ->variable($object->alias($namespace . '\\' . $class))->isNull()
+            ->if($this->function->class_exists = false)
+            ->and($this->function->interface_exists = true)
+            ->then
+                ->variable($object->alias($namespace . '\\' . $class))->isNull()
+        ;
+    }
 }
