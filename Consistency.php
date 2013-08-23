@@ -2,9 +2,9 @@
 namespace Hoa\Composer {
 
 class Consistency {
-    private static $_multiton = array();
+    protected static $_multiton = array();
 
-    private $_family;
+    protected $_family;
 
     public static function instance($family) {
         if(false === isset(static::$_multiton[$family])) {
