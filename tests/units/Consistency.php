@@ -15,9 +15,11 @@ class Consistency extends atoum {
 
     public function testImport() {
         $this
-            ->if($object = TestedClass::from(uniqid()))
+            ->given($family = uniqid())
+            ->if($object = TestedClass::from($family))
             ->then
-                ->object($object->from(uniqid()))->isIdenticalTo($object)
+                ->object($object->from($family))->isIdenticalTo($object)
+                ->object($object->from(uniqid()))->isNotIdenticalTo($object)
         ;
     }
 

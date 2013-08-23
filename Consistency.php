@@ -2,15 +2,16 @@
 namespace Hoa\Composer {
 
 class Consistency {
-    private static $_instance;
+    private static $_multiton = array();
 
     private $_family;
 
     public static function instance($family) {
-        if(null === static::$_instance)
-            static::$_instance = new static($family);
+        if(false === isset(static::$_multiton[$family])) {
+            static::$_multiton[$family] = new static($family);
+        }
 
-        return static::$_instance;
+        return static::$_multiton[$family];
     }
 
     public static function from($family) {
