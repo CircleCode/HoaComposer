@@ -7,8 +7,8 @@
     "license"    : "BSD-3-Clause",
     "authors"    : [
         {
-            "name": "jubianchi",
-            "email": "contact@jubianchi.fr"
+            "name": "Julien Bianchi",
+            "email": "julien.bianchi@hoa-project.net"
         },
         {
             "name" : "Ivan Enderlin",
@@ -19,27 +19,6 @@
             "homepage": "http://hoa-project.net/"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/jubianchi/Websocket.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/jubianchi/Socket.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/jubianchi/Stream.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/jubianchi/Http.git"
-        }
-    ],
-    "require": {
-        "hoa/websocket": "dev-master"
-    },
     "require-dev": {
         "atoum/atoum": "dev-master"
     },
