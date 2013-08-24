@@ -27,6 +27,7 @@
     "autoload": {
         "psr-0": {
             "Hoa\\Composer": "."
-        }
+        },
+        "files": ["Consistency.php"]
     }
 }
